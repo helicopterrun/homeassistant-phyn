@@ -1,7 +1,22 @@
 """Common fixtures for Phyn tests."""
-import pytest
+import sys
 from unittest.mock import AsyncMock, MagicMock, patch
 
+# Mock aiophyn module before any imports that need it
+sys.modules['aiophyn'] = MagicMock()
+sys.modules['aiophyn.errors'] = MagicMock()
+sys.modules['aiophyn.api'] = MagicMock()
+
+# Create mock error classes
+class MockRequestError(Exception):
+    """Mock RequestError"""
+    pass
+
+sys.modules['aiophyn'].errors = MagicMock()
+sys.modules['aiophyn'].errors.RequestError = MockRequestError
+sys.modules['aiophyn.errors'].RequestError = MockRequestError
+
+import pytest
 from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
 
 from custom_components.phyn.const import DOMAIN
