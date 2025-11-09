@@ -55,6 +55,14 @@ _2023.08.00_
 
 The base entity classes have been consolidated into a single canonical location: `custom_components/phyn/entities/base.py`. The legacy `custom_components/phyn/entity.py` file has been completely removed to eliminate duplicate class definitions. If you maintain local forks or external code that imports from the old path, please update imports to use `..entities.base` (for internal package imports) or `custom_components.phyn.entities.base` as appropriate.
 
+### Dependencies
+
+This integration uses a custom fork of the [aiophyn](https://github.com/helicopterrun/aiophyn) library instead of the upstream PyPI package. This allows for:
+- Direct control over aiophyn updates
+- Faster deployment of bug fixes
+- Support for custom features specific to this integration
+- Easier maintenance and coordination
+
 ## Development and Testing
 
 This integration includes automated tests to ensure quality and reliability.
